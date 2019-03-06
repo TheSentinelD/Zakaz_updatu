@@ -4,7 +4,9 @@
 
   tasks: 
    - name: Zakáže updaty
-     win_command: sc.exe stop wuauserv
+     win_command: |
+      sc stop wuauserv
+      sc config wuauserv start= disabled
    
    - name: Kontrola stavu
      win_command: sc.exe query wuauserv

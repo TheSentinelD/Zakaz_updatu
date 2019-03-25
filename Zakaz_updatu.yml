@@ -6,12 +6,12 @@
    - name: Zakáže updaty
      win_command: sc stop wuauserv
      register: return
-     changed_when: return.rc == 0 or return.rc == 1062 or return.rc == 3010
+     failed_when: return.rc not in [0,1062,3010]
       
    - name: Zakáže autostart updatů
      win_command: sc config wuauserv start= disabled
      register: return2
-     changed_when: return2.rc == 0 or return2.rc == 1062 or return2.rc == 3010
+     failed_when: return2.rc not in [0,1062,3010]
    
    - name: Kontrola stavu
      win_command: sc.exe query wuauserv

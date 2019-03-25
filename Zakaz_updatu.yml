@@ -6,7 +6,7 @@
    - name: Zakáže updaty
      win_command: sc stop wuauserv
      register: return
-     failed_when: return.rc == 0 or return.rc == 1062 or return.rc == 3010
+     changed_when: return.rc == 0 or return.rc == 1062 or return.rc == 3010
       
    - name: Zakáže autostart updatů
      win_command: sc config wuauserv start= disabled
